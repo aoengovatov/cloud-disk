@@ -1,10 +1,12 @@
-const Pool = require("pg");
+const Pool = require("pg").Pool;
+const config = require("config");
+
 const pool = new Pool({
-    user: "postgres",
-    password: "root",
-    host: "localhost",
-    port: 5432,
-    database: "cloud_disk",
+    user: `${config.get("userDb")}`,
+    password: `${config.get("passwordDb")}`,
+    host: `${config.get("hostDb")}`,
+    port: `${config.get("portDb")}`,
+    database: `${config.get("nameDb")}`,
 });
 
 module.exports = pool;

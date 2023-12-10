@@ -1,15 +1,10 @@
 const express = require("express");
 const config = require("config");
-
-const app = express();
+const userRouter = require("./routes/userRoutes");
 const PORT = config.get("serverPort");
 
-const start = async () => {
-    try {
-        app.listen(PORT, () => {
-            console.log("server start on port", PORT);
-        });
-    } catch {}
-};
+const app = express();
+app.use(express.json());
+app.use("/api", userRouter);
 
-start();
+app.listen(PORT, () => console.log(`server started on port ${PORT}`));
