@@ -1,8 +1,4 @@
 {
-    "serverPort": 8080,
-    "userDb": "postgres",
-    "passwordDb": "root",
-    "hostDb": "localhost",
-    "portDb": 5432,
-    "nameDb": "cloud_disk"
+    "serverPort": 5000,
+    "mongoUrl": "mongodb+srv://aoengovatov:aoengovatovadmin@cluster0.ndz6eui.mongodb.net/cloud-disk?retryWrites=true&w=majority&appName=Cluster0"
 }
