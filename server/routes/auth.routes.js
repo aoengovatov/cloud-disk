@@ -1,6 +1,9 @@
 const Router = require("express");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const userMapper = require("../mappers/userMapper");
 const { check, validationResult } = require("express-validator");
 const router = new Router();
 
@@ -30,7 +33,7 @@ router.post(
                     .json({ message: `User with email ${email} already exist` });
             }
 
-            const hashPassword = await bcrypt.hash(password, 15);
+            const hashPassword = await bcrypt.hash(password, 10);
             const user = new User({ email, password: hashPassword });
             await user.save();
 
@@ -40,5 +43,33 @@ router.post(
         }
     }
 );
+
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(404).json({ message: "Invalid password" });
+        }
+
+        const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+            expiresIn: "1h",
+        });
+
+        return res.json({
+            toket,
+            user: userMapper(user),
+        });
+
+    } catch (e) {
+        return res.send({ message: "Server error" });
+    }
+});
 
 module.exports = router;
