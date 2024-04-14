@@ -22,7 +22,7 @@ router.post(
         try {
             const { email, password } = req.body;
 
-            const userExist = User.findOne({ email });
+            const userExist = await User.findOne({ email });
 
             if (userExist) {
                 return res
