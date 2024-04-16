@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./navbar/Navbar";
-import { Registration } from "./registration/Registration";
+import { Registration } from "./authorization/Registration";
 import "./app.less";
+import { Login } from "./authorization/login";
 
 export const App = () => {
     return (
@@ -11,6 +12,7 @@ export const App = () => {
                 <div className="wrap">
                     <Routes>
                         <Route path="/registration" element={<Registration />} />
+                        <Route path="/login" element={<Login />} />
                     </Routes>
                 </div>
             </div>
