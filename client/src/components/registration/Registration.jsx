@@ -1,6 +1,7 @@
 import "./registration.less";
 import { Input } from "../../ulils/input/Input";
 import { useState } from "react";
+import { registration } from "../../actions/user";
 
 export const Registration = () => {
     const [email, setEmail] = useState("");
@@ -21,7 +22,12 @@ export const Registration = () => {
                 type="password"
                 placeholder="Введите пароль..."
             />
-            <button className="registration__btn">Войти</button>
+            <button
+                className="registration__btn"
+                onClick={() => registration(email, password)}
+            >
+                Войти
+            </button>
         </div>
     );
 };
