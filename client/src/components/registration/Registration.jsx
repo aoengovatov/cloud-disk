@@ -1,14 +1,26 @@
 import "./registration.less";
 import { Input } from "../../ulils/input/Input";
+import { useState } from "react";
 
 export const Registration = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div className="registration">
-            <div className="registration__header"></div>
-            <Input type="text" placeholder="" />
-            <Input type="text" placeholder="" />
-            <Input type="text" placeholder="" />
-            <Input type="text" placeholder="" />
+            <div className="registration__header">Регистрация</div>
+            <Input
+                value={email}
+                setValue={setEmail}
+                type="text"
+                placeholder="Введите email..."
+            />
+            <Input
+                value={password}
+                setValue={setPassword}
+                type="password"
+                placeholder="Введите пароль..."
+            />
             <button className="registration__btn">Войти</button>
         </div>
     );

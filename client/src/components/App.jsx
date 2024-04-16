@@ -8,9 +8,11 @@ export const App = () => {
         <BrowserRouter>
             <div className="app">
                 <Navbar />
-                <Routes>
-                    <Route path="/registration" element={<Registration />} />
-                </Routes>
+                <div className="wrap">
+                    <Routes>
+                        <Route path="/registration" element={<Registration />} />
+                    </Routes>
+                </div>
             </div>
         </BrowserRouter>
     );
