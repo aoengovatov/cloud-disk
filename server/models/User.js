@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { model, Schema } = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -21,10 +21,12 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String,
     },
-    files: {
-        type: mongoose.ObjectId,
-        ref: "File",
-    },
+    files: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "File",
+        },
+    ],
 });
 
-module.exports = mongoose.Model("User", UserSchema);
+module.exports = model("User", UserSchema);

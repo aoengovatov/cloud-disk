@@ -63,10 +63,9 @@ router.post("/login", async (req, res) => {
         });
 
         return res.json({
-            toket,
+            token,
             user: userMapper(user),
         });
-
     } catch (e) {
         return res.send({ message: "Server error" });
     }
