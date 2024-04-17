@@ -6,6 +6,7 @@ const config = require("config");
 const userMapper = require("../mappers/userMapper");
 const { check, validationResult } = require("express-validator");
 const router = new Router();
+const authMiddleware = require("../middleware/auth.middleware");
 
 router.post(
     "/registration",
@@ -57,6 +58,23 @@ router.post("/login", async (req, res) => {
         if (!isPasswordValid) {
             return res.status(404).json({ message: "Invalid password" });
         }
+
+        const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+            expiresIn: "1h",
+        });
+
+        return res.json({
+            token,
+            user: userMapper(user),
+        });
+    } catch (e) {
+        return res.send({ message: "Server error" });
+    }
+});
+
+router.post("/auth", authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findOne({id: req.user.id});
 
         const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
             expiresIn: "1h",
