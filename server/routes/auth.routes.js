@@ -72,9 +72,9 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.post("/auth", authMiddleware, async (req, res) => {
+router.get("/auth", authMiddleware, async (req, res) => {
     try {
-        const user = await User.findOne({id: req.user.id});
+        const user = await User.findOne({ _id: req.user.id });
 
         const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
             expiresIn: "1h",
