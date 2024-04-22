@@ -4,6 +4,7 @@ import { Navbar } from "./navbar/Navbar";
 import { Registration } from "./authorization/Registration";
 import { auth } from "../actions/user";
 import { Login } from "./authorization/login";
+import { Disk } from "./disk/Disk";
 import { useEffect } from "react";
 import "./app.less";
 
@@ -21,10 +22,14 @@ export const App = () => {
                 <Navbar />
                 <div className="wrap">
                     <Routes>
-                        {!isAuth && (
+                        {!isAuth ? (
                             <>
                                 <Route path="/registration" element={<Registration />} />
                                 <Route path="/login" element={<Login />} />
+                            </>
+                        ) : (
+                            <>
+                                <Route path="/" element={<Disk />} />
                             </>
                         )}
                     </Routes>
